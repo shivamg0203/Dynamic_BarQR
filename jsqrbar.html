@@ -40,9 +40,13 @@
 </div>
 
 <script>
-const inp = document.getElementById('inputgrp')
 
-inp.addEventListener('input', generateCode);
+    const barelm = document.querySelector('#BarCode')
+    const qrelm = document.querySelector('#QRCode')
+    const genelm = document.querySelector('#generatedCode')
+    const infelm =document.querySelector('#infos')
+    const inp = document.getElementById('inputgrp')
+    inp.addEventListener('input', generateCode);
 
 function giveCode(){
     const co =  Math.floor(Math.random() * 1000000000000).toString().padStart(11, '0');
@@ -80,35 +84,26 @@ function downloadimg(p){
         var link = document.createElement('a');
         link.download = `my${p}.${y}`;
         link.href = canvas.toDataURL()
-        //link.href = document.getElementById(`${p}Code`).children[0].toDataURL()
         console.log(p)
         link.click();
     }
     return     
+    //link.href = document.getElementById(`${p}Code`).children[0].toDataURL()
 } 
-    /*if (p==='QR'){
-        //console.log('ghj')
-        //download(p,y)
-    }
-    else if (p==='Bar'){
-        //download(p,y)    
-    }*/
 function generateCode() {
-    // Generate a random 11-digit code (excluding 0 at the beginning)
-
-    /*code = giveCode()
-    while (code[0]=='0' || code.length != 12){
-        console.log('while')
-        code = giveCode()
-    }*/
     // Display the generated code
     const code = inp.value;
-    if (code==''){
+    if (code==''||!code){
         console.warn('Text Cannot be Null!')
+        inp.value = ""
+        barelm.innerHTML = '';
+        qrelm.innerHTML='';
+        genelm.innerText = `Generated Code: ${code}`;
+        infelm.innerText = `length : ${code.length}`;
         return false
     }
-    document.getElementById('generatedCode').innerText = `Generated Code: ${code}`;
-    document.getElementById('infos').innerText = `length : ${code.length}`;
+    genelm.innerText = `Generated Code: ${code}`;
+    infelm.innerText = `length : ${code.length}`;
 
     // Generate QR Code
     const qrCodeCanvas = document.createElement('canvas');
@@ -121,8 +116,8 @@ function generateCode() {
         includetext: true,    // Show human-readable text
         textxalign: 'center', // Center text
     });
-    document.getElementById('QRCode').innerHTML = '';
-    document.getElementById('QRCode').appendChild(qrCodeCanvas);
+    qrelm.innerHTML = '';
+    qrelm.appendChild(qrCodeCanvas);
 
     // Generate Bar Code
     const barCodeCanvas = document.createElement('canvas');
@@ -135,8 +130,8 @@ function generateCode() {
         includetext: true,    // Show human-readable text
         textxalign: 'center', // Center text
     });
-    document.getElementById('BarCode').innerHTML = '';
-    document.getElementById('BarCode').appendChild(barCodeCanvas);
+    barelm.innerHTML = '';
+    barelm.appendChild(barCodeCanvas);
 }
 </script>
 
