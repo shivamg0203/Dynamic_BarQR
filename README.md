@@ -9,5 +9,5 @@
    git clone https://github.com/shivamg0203/Dynamic_BarQR
 ```
 ## 4.Previews
-**See previews on [Link](https://github.com/shivamg0203/Dynamic_BarQR/preview)**
+**See previews on [Link](https://github.com/shivamg0203/Dynamic_BarQR/tree/main/preview)**
 
